@@ -1,0 +1,30 @@
+/*Fuente s de google para letras*/
+@import url('https://fonts.googleapis.com/css2?family=Hanalei&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanalei&family=Potta+One&display=swap');
+
+/*Fondo con degradado*/
+body{
+	background: rgb(82,75,182);
+	background: linear-gradient(0deg, rgba(82,75,182,1) 0%, rgba(200,200,246,1) 43%, rgba(0,212,255,1) 100%);
+}
+
+h1{
+	font-family: 'Potta One', cursive;
+}
+
+/*##########################*/
+/*####      Cartas    #####*/
+/*##########################*/
+
+	.carta{
+		display: inline-block;
+		height: 250px;
+		width: 190px;
+	}
+
+
+	.cartaReverso{
+		background: url("img/cartaReverso.png");
+		background-size: cover;
+		
+	}

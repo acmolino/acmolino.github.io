@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<link rel="stylesheet" type="text/css" href="estilo.css">
+<script type="text/javascript" src="funciones.js"></script>
+</head>
+<!-- Cuando carga la pagina mezcla las cartas-->
+<body onload="mezclarCartas()"> 
+
+	<center><H1>Juego de Memoria</H1><center>
+
+<center>
+<table border="1">
+	<!-- Cada celda representa un numero de carta para el orden aleatorio-->
+	<tr>
+		<td id=0 onclick="elegirCarta(this.id)"></td>
+		<td id=1 onclick="elegirCarta(this.id)"></td>
+		<td id=2 onclick="elegirCarta(this.id)"></td>
+		<td id=3 onclick="elegirCarta(this.id)"></td>
+	</tr>
+
+	<tr>
+		<td id=4 onclick="elegirCarta(this.id)"></td>
+		<td id=5 onclick="elegirCarta(this.id)"></td>
+		<td id=6 onclick="elegirCarta(this.id)"></td>
+		<td id=7 onclick="elegirCarta(this.id)"></td>
+	</tr>
+</table>
+
+<p>Movimientos: <span id="movimientos"></span></p>
+<p id="ganador"></p>
+
+</center>
+
+
+</body>
+
+
+</html>
