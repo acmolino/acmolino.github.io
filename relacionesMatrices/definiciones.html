@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Matrices Binarias</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+
+  <link rel=StyleSheet href="css/estilo.css" type="text/css">
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-2 sidenav" style="font-family: 'Mansalva', cursive; font-size: 20px;">
+      <div id="espacio" style="height:10%;"></div>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="index.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Inicio</a></li>
+         <li><a href="#" class="toggle-custom" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><span class="glyphicon glyphicon-equalizer"></span>&nbsp;&nbsp;   Matriz   &nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+      <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
+        <li><a href="matriz.html">Solo matriz</a></li>
+        <li><a href="conjuntos.html">Matriz con elementos</a></li>
+      </ul></li>
+        <li><a href="ejercicios.html"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Ejercicios</a></li>
+        <li class="active"><a href="definiciones.html"><span class="glyphicon glyphicon-education"></span>&nbsp;&nbsp;Definiciones</a></li>
+      </ul><br>
+    </div>
+
+    <div class="col-sm-10">
+        
+      <h1 align="center">Representaciones matriciales de relaciones binarias</h1>
+      <br>
+      <h2>Algunas definiciones importantes </h2>
+
+
+        <div class="panel-group">
+          <div class="panel panel-default">
+              <div class="panel-heading">Relación binaria</div>
+              <div class="panel-body">La relación binaria de dos conjuntos A y B, es el conjunto formado por todos los pares ordenados (a, b), que cumplen reglas dadas lo cual a estas reglas se le llama regla de dependencia o correspondencia.</div>
+          </div>
+        </div>
+         <div class="panel-group">
+          <div class="panel panel-default">
+              <div class="panel-heading">Representaciones</div>
+              <div class="panel-body">Las relaciones pueden representarse gráficamente de diversas maneras, siendo las más comunes la representación cartesiana, la matricial y la sagitaria. Nos enfocaremos en la matricial</div>
+          </div>
+        </div>
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Mansalva&display=swap');
+
+.sidebarPRO {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #4CAF50;
+  position: fixed;
+  height: 100vh;
+  overflow: auto;
+  font-family: 'Mansalva', cursive;
+  font-size: 120%;
+}
+
+.sidebarPRO a {
+	
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+  text-align:right;
+}
+ 
+.sidebarPRO a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.sidebarPRO a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebarPRO {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebarPRO a {float: left;}
+  div.content {margin-left: 0;}
+  #espacio{display:none;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebarPRO a {
+    text-align: center;
+    float: none;
+  }
+    #espacio{display:none;}
+}
+
+#derecha{
+  float: right;
+}

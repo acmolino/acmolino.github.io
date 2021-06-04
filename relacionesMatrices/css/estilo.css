@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Mansalva&display=swap');
+
+body{  margin:0;}
+
+  input[type=text] {
+      margin: 15px 15px;
+      width: 40px;
+      padding: 10px 10px 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+  input[type=number] {
+      margin: 15px 15px;
+      width: 60px;
+      padding: 10px 10px 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+input[type=button] {
+  background-color: #337ab7; /* Azul */
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+ 
+}
+
+.tablasDIV{
+    /*float:right;*/
+	 display: inline-block;
+    width: 200px;
+    height: 100px;
+     margin: 1em;
+}
+
+.tablasExpliaciones{
+ display: inline-block;
+    width: 60%;
+    /*height: 100px;*/
+     margin: 1em;
+
+
+}
+
+h1{
+  /*font:38px Arial, sans-serif;*/
+  font-style: black;
+}
+
+p{
+   /*font: normal 18px Arial, sans-serif;*/
+   display: inline-block;
+}
+
+/*Tabla*/
+table{
+	  border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: normal 18px Arial, sans-serif;
+}
+
+thead th {
+    background-color: #DDEFEF;
+    border: solid 1px #DDEEEE;
+    color: #336B6B;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+td {
+    text-align: center;
+    border: solid 1px #DDEEEE;
+    color: #333;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+#tablaR{
+  border: 0;
+   font: normal 36px Arial, sans-serif;
+    border-right: solid 3px #000000;
+  border-left: solid 3px #000000;
+}
+
+
+#EV{
+  margin: 15px 15px;
+  width: 40px;
+  font-size: 16px;
+     
+}
+
+#EH{
+  margin: 15px 15px;
+  width: 40px;
+  padding: 10px 20px 10px 10px;
+  font-size: 16px;
+     
+}
+
+
+#RelacionAxA{
+  font-size: 26px;
+
+}
+/*
+
+
+*/
+
