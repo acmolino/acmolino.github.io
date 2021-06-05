@@ -11,7 +11,7 @@ require_once CONFIG.'includes.php';
 $router = new AltoRouter();
 
 //Mi directorio base
-$router->setBasePath('/logosofico/Integrada/cartasAPI');
+$router->setBasePath('https://acmolino.github.io/cartasAPI/');
 session_start();
 
 /**
