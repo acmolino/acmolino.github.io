@@ -2,13 +2,21 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<title>Mazo de cartas</title>
 </head>
 <body onload="inicio()">
 
-	<button onclick="mostrarCarta()">Mostrar</button>
-
-	<img src="" id="imgCarta">
+	<table align="center">
+		<tr>
+			<td><img src="https://acmolino.github.io/recursos/cartas-img/otra/tapa.png" id="imgCarta"></td>
+		</tr>
+		<tr>
+			<td align="center"><button id="btnAccion" onclick="mostrarCarta()">Mostrar</button></td>
+		</tr>
+		<tr>
+			<td align="center"><p>Cartas en el mazo: <span id="cantCartas">48</span></p></td>
+		</tr>
+	</table>
 
 </body>
 
@@ -32,7 +40,7 @@
 
 	function inicio(){
 		iniciarMazo().then(dato => {
-	    		console.log(dato);
+	    	console.log(dato);
 			mazo = dato.ID;
 		});	
 	}
@@ -51,8 +59,16 @@
 	function mostrarCarta(){
 		traerCarta().then(dato => {
 	    	console.log(dato);
-	    	var carta = document.getElementById('imgCarta');
-	    	carta.src = dato.carta.img;
+	    	if(dato.restan > 0){
+	    		document.getElementById('cantCartas').innerHTML = dato.restan;
+		    	var carta = document.getElementById('imgCarta');
+		    	carta.src = dato.carta.img;
+	    	}else{
+	    		 document.getElementById('imgCarta').remove();
+	    		 alert("Fin del mazo");
+	    		 document.getElementById('btnAccion').innerHTML = "Reiniciar";
+
+	    	}
 		});
 	}
 	
