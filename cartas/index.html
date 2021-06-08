@@ -6,21 +6,28 @@
 	<!-- Bootstrap 5 CDN -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
+	<style type="text/css">
+		body {
+		  background-image: url("fondo.jpg");
+		  background-repeat: repeat;
+		}
+	</style>
+
 	<title>Mazo de cartas</title>
 </head>
 <body onload="inicio()">
 	<div class="container">
 		<center><h1>Mazo de cartas españolas</h1></center>
 
-		<table align="center" class="table">
+		<table align="center" class="table-borderless">
 			<tr>
 				<td align="center"><img src="https://acmolino.github.io/recursos/cartas-img/otra/tapa.png" id="imgCarta" width="206px" height="316px"></td>
 			</tr>
 			<tr>
-				<td align="center"><button id="btnAccion" onclick="mostrarCarta()">Mostrar</button></td>
+				<td align="center" style="padding: 10px;"><button type="button" class="btn btn-primary" id="btnAccion" onclick="mostrarCarta()">Mostrar</button></td>
 			</tr>
 			<tr>
-				<td align="center"><p>Cartas en el mazo: <span id="cantCartas">48</span></p></td>
+				<td align="center"><p style="color:white;">Cartas en el mazo: <span id="cantCartas">48</span></p></td>
 			</tr>
 		</table>
 	</div>
