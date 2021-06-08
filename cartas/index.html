@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body onload="inicio()">
+
+	<button onclick="mostrarCarta()">Mostrar</button>
+
+	<img src="" id="imgCarta">
+
+</body>
+
+<!--Codigo en Javascript-->
+<script type="text/javascript">
+	//ruta para llamar a la API
+	//var ruta = "http://localhost/logosofico/Integrada/cartasAPI"; //Local
+	var ruta = "https://cartasapi.vercel.app"; //Online
+
+
+	//Inicia el mazo, utilizando variable de session
+	async function iniciarMazo(){
+	  const response = await fetch(ruta+'/iniciarMazo', 
+	    {
+	        method: 'GET',
+	    });
+	    // waits until the request completes...
+	    const res = await response.json();
+	    return res;       
+	}
+
+	function inicio(){
+		iniciarMazo().then(dato => {
+	    	console.log(dato);
+		});	
+	}
+
+
+	async function traerCarta(){
+	  const response = await fetch(ruta+'/darCarta', 
+	    {
+	        method: 'GET',
+	    });
+	    // waits until the request completes...
+	    const res = await response.json();
+	    return res;       
+	}
+
+	function mostrarCarta(){
+		traerCarta().then(dato => {
+	    	console.log(dato);
+	    	var carta = document.getElementById('imgCarta');
+	    	carta.src = "../cartasAPI/"+dato.carta.img;
+		});
+	}
+	
+</script>
+</html>
