@@ -17,7 +17,7 @@
 	//ruta para llamar a la API
 	//var ruta = "http://localhost/logosofico/Integrada/cartasAPI"; //Local
 	var ruta = "https://cartasapi.vercel.app"; //Online
-
+	var mazo;
 
 	//Inicia el mazo, utilizando variable de session
 	async function iniciarMazo(){
@@ -32,13 +32,14 @@
 
 	function inicio(){
 		iniciarMazo().then(dato => {
-	    	console.log(dato);
+	    		console.log(dato);
+			mazo = dato.ID;
 		});	
 	}
 
 
 	async function traerCarta(){
-	  const response = await fetch(ruta+'/darCarta', 
+	  const response = await fetch(ruta+'/darCarta/'+mazo, 
 	    {
 	        method: 'GET',
 	    });
