@@ -51,7 +51,7 @@
 		traerCarta().then(dato => {
 	    	console.log(dato);
 	    	var carta = document.getElementById('imgCarta');
-	    	carta.src = "../cartasAPI/"+dato.carta.img;
+	    	carta.src = dato.carta.img;
 		});
 	}
 	
