@@ -1,0 +1,35 @@
+.tateti td 
+{
+	height: 200px;
+	width: 200px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+.disable
+{
+	pointer-events:none;
+}
+
+.icon{
+	pointer-events: auto;
+}
+
+.o-icon
+{
+	background: url("../img/o-icon.png");
+	background-repeat: no-repeat;
+  	background-position: center;
+}
+
+.x-icon
+{
+	background: url("../img/x-icon.png");
+	background-repeat: no-repeat;
+  	background-position: center;
+}
+
+
+

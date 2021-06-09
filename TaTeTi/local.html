@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/estilo.css">
+
+</head>
+<body onload="inicializarTablero()">
+
+	<center><h1>TA - TE - TI</h1></center><br>
+
+<div class="container">
+
+	<div class="row">
+		<!--<div><p>Decidir marca</p> <button onclick="decidirMarca(0), vigilancia(false)">X</button><button onclick="decidirMarca(1), vigilancia(true)">O</button></div>-->
+		<br><br>
+
+		<div class="col-md-9">
+
+			<table class="conBordes tateti">
+				<tr>
+					<td id="00" onclick="marcarTablero(this.id)"></td>
+					<td id="01" onclick="marcarTablero(this.id)"></td>
+					<td id="02" onclick="marcarTablero(this.id)"></td>
+				</tr>
+
+				<tr>
+					<td id="10" onclick="marcarTablero(this.id)"></td>
+					<td id="11" onclick="marcarTablero(this.id)"></td>
+					<td id="12" onclick="marcarTablero(this.id)"></td>
+				</tr>
+
+				<tr>
+					<td id="20" onclick="marcarTablero(this.id)"></td>
+					<td id="21" onclick="marcarTablero(this.id)"></td>
+					<td id="22" onclick="marcarTablero(this.id)"></td>
+				</tr>
+
+			</table>
+		</div><!--Fin Col TATETI-->
+
+		<div class="col-md-3">
+			<cenert>
+				<button type="button" class="btn btn-success" id="reiniciar" onclick="reiniciar()">Reiniciar</button>
+			</cenert>
+			
+			<br><br>
+			<h3>Resultados</h3>
+			<p id="ganador"></p>
+
+			<br>
+
+			<hr>
+
+			<table class="table table-striped">
+				<thead>
+					<th>Jugador</th>
+					<th>Ganados</th>
+				</thead>
+				<tr>
+					<td >Jugador X</td>
+					<td><p id="ganadosX"></p></td>
+				</tr>
+				<tr>
+					<td>Jugador O</td>
+					<td><p id="ganadosO"></p></td>
+				</tr>
+			</table>
+
+
+		</div>
+
+	</div><!--Fin ROW-->
+
+</div><!--Fin contenedor-->
+
+<div id="demo"></div>
+
+<script type="text/javascript" src="js/funciones.js"></script>
+<!--<script type="text/javascript" src="js/funciones_online.js"></script>-->
+
+
+</body>
+</html>
