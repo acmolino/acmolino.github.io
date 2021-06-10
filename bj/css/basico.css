@@ -1,0 +1,14 @@
+body{
+	background: rgb(54,129,10);
+	background: linear-gradient(90deg, rgba(54,129,10,0.927608543417367) 0%, rgba(57,125,68,0.577468487394958) 50%, rgba(25,149,13,0.6867121848739496) 100%);
+}
+
+#btnDarCarta, 
+#btnIniciarMano, 
+#btnPlantarse, 
+#btnDarDeNuevo,
+#separacionMedio,
+#separacionBaja {
+	display: none;
+}
+
