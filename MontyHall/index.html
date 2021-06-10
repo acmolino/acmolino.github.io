@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Juego Monty Hall</title>
+<link rel="stylesheet" type="text/css" href="css/estilo.css">
+
+</head>
+<body>
+	<center>
+
+		<h1>Monty Hall Juego (Versión Copa del Mundo)</h1>
+		<div class="puerta puertaCerrada" id=0 onclick="elegirPuerta(0)"></div>
+		<div class="puerta puertaCerrada" id=1 onclick="elegirPuerta(1)"></div>
+		<div class="puerta puertaCerrada" id=2 onclick="elegirPuerta(2)"></div>
+		<br>
+
+		<button id="reinicio" class="button button1" onclick="reinicioDePuertas()">Jugar nuevamante</button>
+	
+		<h2>Estadísticas</h2>
+	<table>
+		<thead>
+  			<tr>
+    			<th></th>
+    			<th>Jugados</th>
+    			<th>Ganados</th>
+    			<th>Perdidos</th>
+  			</tr>
+		</thead>
+		<tbody>
+  			<tr>
+    			<td>Totales</td>
+    			<td id="TotalesJugados"></td>
+    			<td id="TotalesGanados"></td>
+    			<td id="TotalesPerdidos"></td>
+  			</tr>
+  			<tr>
+    			<td>Sin cambiar</td>
+    			<td id="SCTotal"></td>
+    			<td id="SCGanados"></td>
+    			<td id="SCPerdidos"></td>
+  				</tr>
+  			<tr>
+    			<td>Con cambio</td>
+    			<td id="cambioTotal"></td>
+    			<td id="cambioGanados"></td>
+    			<td id="cambioPerdidos"></td>
+  			</tr>
+		</tbody>
+	</table>
+	</center>
+
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1 id="TextoResultado"></h1>
+  </div>
+
+</div>
+
+
+
+</body>
+
+<script type="text/javascript" src="js/scripts.js"></script>
+
+</html>

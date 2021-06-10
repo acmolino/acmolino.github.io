@@ -1,0 +1,167 @@
+body{
+	background: rgb(82,75,182);
+	background: linear-gradient(0deg, rgba(82,75,182,1) 0%, rgba(200,200,246,1) 43%, rgba(0,212,255,1) 100%);
+}
+
+@font-face {
+  font-family: titulos;
+  src: url(../fuentes/Ganttlets.ttf);
+
+}
+@font-face {
+  font-family: tabla;
+  src: url(../fuentes/Bellerose.ttf);
+}
+
+h1{
+	font-family: titulos;
+}
+h2{
+	font-family: tabla;
+}
+
+
+
+/*##########################*/
+/*####      Puertas    #####*/
+/*##########################*/
+
+	.puerta{
+		display: inline-block;
+		height: 250px;
+		width: 190px;
+	}
+
+
+	.puertaCerrada{
+		background: url("../img/puertaCerrada.png");
+		background-size: cover;
+		
+	}
+
+	.puertaCerrada:hover{
+		background: url("../img/puertaCerradaHover.png");
+		background-size: cover;
+	}
+
+	.primeraEleccion{
+		background: url("../img/puertaCerradaHover.png");
+		background-size: cover;
+	}
+
+	.puertaAbierta{
+		background: url("../img/puertaAbierta.png");
+		background-size: cover;
+		cursor: not-allowed;
+	}
+
+	.puertaGanadora{
+		background: url("../img/puertaGanadora.png");
+		background-size: cover;
+	}
+
+/*##########################*/
+/*####     Tabla      ######*/
+/*##########################*/
+
+	/**/
+	table {
+		align-content: center;
+  		border-collapse: collapse;
+  		width: 40%;
+  		font-family: tabla;
+		}
+
+	th, td {
+  		text-align: left;
+  		padding: 8px;
+		}
+
+	tr:nth-child(even){background-color: #f2f2f2}
+	tr:nth-child(odd){background-color: #9A9A9A}
+
+	th {
+  		background-color: #7456B3;
+  		color: white;
+		}
+
+
+/*##########################*/
+/*####    Boton       ######*/
+/*##########################*/
+	.button {
+  		background-color: ##FCABC2; /* Green */
+  		border: none;
+  		color: white;
+  		padding: 16px 32px;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		font-size: 16px;
+  		margin: 4px 2px;
+  		transition-duration: 0.4s;
+  		cursor: pointer;
+	}
+
+	.button1 {
+  		background-color: white; 
+  		color: black; 
+  		border: 2px solid #FCABC2;
+	}
+
+	.button1:hover {
+ 	 	background-color: #B6697F;
+  		color: white;
+	}
+
+
+	.button:disabled {
+		background-color: #E7E7E5;
+		color: #F7FBD6;
+		cursor: not-allowed;
+	}
+
+
+
+
+/*##########################*/
+/*####      Modal     ######*/
+/*##########################*/
+
+/* (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
