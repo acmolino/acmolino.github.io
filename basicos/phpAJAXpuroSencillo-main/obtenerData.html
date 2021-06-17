@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+	//Inicializamos objeto XMLHttpRequest
+	var xmlhttp = new XMLHttpRequest();
+ 	//Indicamos desde donde traemos los datos
+	xmlhttp.open("GET","data.php",true); 
+
+	//Controlamos que la respuesta haya llegado, realizando una "callback"
+	xmlhttp.onreadystatechange = function() {
+    	if (this.readyState == 4 && this.status == 200) {
+    		//console.log(this.responseText);
+      		document.getElementById("mensaje").innerHTML = this.responseText;
+    	}
+ 	};
+
+ 	//Enviamos la petición
+	xmlhttp.send(); 
+
+	</script>
+
+	<!-- Mostrmos el resultado -->
+	<p id="mensaje"></p>
+
+</body>
+</html>
