@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+	<div id="tablaPersonas">
+	  <table >
+	  <thead>
+	    <tr>
+	      <th>ID</th>
+	      <th>Nombre</th>
+	      <th>Correo</th>
+	      <th>Sitio</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr v-for="fila in elementosMostrados">
+	      <td>{{fila.id}}</td>
+	      <td>{{fila.name}}</td>
+	      <td>{{fila.email}}</td>
+	      <td>{{fila.website}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+	<br>
+	<ul class="pagination">
+
+	  <li>
+	    <a href="#" 
+	        @click="pagina--" 
+	        :class="{disabled: pagina == 1}">«</a>
+	  </li>
+	  <li>
+	    <a href="#" 
+	        v-for="paginaNumero in paginas" 
+	        @click="pagina = paginaNumero" 
+	        :class="{active: paginaNumero == pagina}">{{paginaNumero}}</a>
+	  </li>
+	  <li>
+	    <a href="#" 
+	        @click="pagina++" 
+	        :class="{disabled: pagina == paginas.length}">»</a>
+	  </li>
+	</ul>
+
+	</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="vueObj.js"></script>
+
+</html>
