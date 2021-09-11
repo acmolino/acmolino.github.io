@@ -20,6 +20,7 @@
 
 		]; //Codigos de conectoers y variables
 
+  var tablaVisible = false;
 
 
 		/**
@@ -131,6 +132,25 @@
 		/*####################################################################################################*/
 
 		/**
+		 * Quitar doble negacion
+		 * 
+		 * 
+		 */ 
+		 function quitarDobleNegacion(formula){
+		 	for (var i = 0; i < formula.length; i++) {
+		        if (formula[i].tipo == 'negacion') {
+		        	if(formula[i+1].tipo == 'negacion'){
+		        		formula.splice(i, 2);
+		        	}
+		        }
+		      }
+		    return formula;
+		 }
+
+
+		/*####################################################################################################*/
+
+		/**
 		 * Agregando parentesis
 		 * 
 		 * Recibe la formula y el ooperador (segun precedencia)
@@ -143,22 +163,38 @@
 		 */
 
 		function agregaParentesis(formula, operador) {
+				formula = quitarDobleNegacion(formula);
 		    for (var i = 0; i < formula.length; i++) {
 		        if (formula[i].codigo == operador) {
 		            //Ver hacia la derecha
-		            if (formula[i + 1].tipo == 'variable') {
+		            if (formula[i + 1].tipo == 'negacion'){
+		              if (formula[i + 2].tipo == 'variable') {
+		                formula.splice(i + 3, 0, variablesYoperadores[10]);
+		              }
+		              
+		              if (formula[i + 2].codigo == 40) { //parentesis de apertura
+		                for (var j = (i + 2); j < formula.length; j++) {
+		                    if (formula[j].codigo == 41) { //Cuando encuentro el parentesis de cierre
+		                        formula.splice(j+1, 0, variablesYoperadores[10]); //Agrego el otro cierre
+		                        break;
+		                    }
+		                }
+		              }
+		            }else{
+		              if (formula[i + 1].tipo == 'variable') {
 		                formula.splice(i + 2, 0, variablesYoperadores[10]);
-		            }
-
-		            if (formula[i + 1].codigo == 40) { //parentesis de apertura
+		              }
+		              
+		              if (formula[i + 1].codigo == 40) { //parentesis de apertura
 		                for (var j = (i + 1); j < formula.length; j++) {
 		                    if (formula[j].codigo == 41) { //Cuando encuentro el parentesis de cierre
 		                        formula.splice(j, 0, variablesYoperadores[10]); //Agrego el otro cierre
 		                        break;
 		                    }
 		                }
+		              }
 		            }
-
+	
 
 		            //Ver hacia la izquierda
 		            if (formula[i - 1].tipo == 'variable') {
@@ -189,13 +225,14 @@
 		                    }
 		                }
 		            }
-
+		            
+		            
 		            i++; //porque cuando agrego un parentesis, quedo corrido, y me veulve a entrar
 		            //i=0;
 		        } //Fin de encontrar operador elegido
 		    } //fin recorrida
 
-		    console.log(formula);
+		    //console.log(formula);
 		    return formula;
 		} //fin de funcion
 
@@ -212,6 +249,7 @@
 		 * @return array formula 
 		 */
 		function sustituirXOR(formula) {
+				formula =  quitarDobleNegacion(formula);
 		    for (var i = 0; i < formula.length; i++) {
 		        if (formula[i].operador == 'xor') {
 		            formula.splice(i, 1, variablesYoperadores[3]); //Operador biCondicional
@@ -264,6 +302,7 @@
 		 * @return array formula sin el bicondcional 
 		 */
 		function quitarBiCondicional(formula) {
+				formula = quitarDobleNegacion(formula);
 		    for (var i = 0; i < formula.length; i++) {
 		        if (formula[i].operador == 'bicondicional') {
 		            var elementosAquitarIzq = 0; //Para saber hasta donde tengo que sustituir
@@ -272,8 +311,8 @@
 		            var variable1 = []; //Un array con ese pedazo de formula
 		            var variable2 = []; //Un array con ese pedazo de formula
 
+                //Hacia la izquierda <<-
 		            //Cuendo aparece parentesis antes del operador
-
 		            if (formula[(i - 1)].codigo == '41') { //Me fijo si hay parentesis de cierre
 
 		                var contadorParentesisCierre = 1;
@@ -305,10 +344,25 @@
 
 		            variable1.reverse(); //Debo invertirla
 
+                //Hacia la derecha ->>
+                //3 opciones 
+                  // negacion 
+                      //variable 
+                      //parentesis
+                  // variable 
+                  // parentesis
+                  
+                //Analaiso negacion que puede bifurcar en las otras dos  
+                var n = i+1;
+                if(formula[n].tipo == 'negacion'){
+                  variable2.push(formula[(n)]);
+                  n++;
+                  elementosAquitarDer++;
+                }
 		            //Cuendo aparece parentesis despues del operador
-		            if (formula[(i + 1)].codigo == '40') { //Me fijo si hay parentesis de apertura
+		            if (formula[n].codigo == '40') { //Me fijo si hay parentesis de apertura
 		                var contadorParentesisCierre = 1;
-		                for (var j = (i + 2); j < formula.length; j++) {
+		                for (var j = (n + 1); j < formula.length; j++) {
 
 		                    if (formula[j].codigo == '40') {
 		                        contadorParentesisCierre++;;
@@ -326,7 +380,7 @@
 		                    }
 		                }
 		            } else {
-		                variable2.push(formula[(i + 1)]);
+		                variable2.push(formula[(n)]);
 		                elementosAquitarDer++;
 		            }
 
@@ -398,6 +452,8 @@
 		 * @return array formula sin condicional
 		 */
 		function quitarCondicional(formula) {
+				formula = quitarDobleNegacion(formula);
+				console.log(formula);
 		    for (var i = 0; i < formula.length; i++) {
 		        if (formula[i].operador == 'condicional') {
 		            var inicio = i
@@ -414,7 +470,7 @@
 		            if (formula[b].tipo == 'parentesis') {
 		                var contadorParentesis = 1;
 		                var j = b + 1;
-		                while (contadorParentesis > 0) {
+		                while (contadorParentesis > 0 /*&& j < formula.length*/) {
 		                    if (formula[j].codigo == '40') {
 		                        contadorParentesis++;
 		                    }
@@ -433,6 +489,7 @@
 		                formula.splice(i - 1, 0, variablesYoperadores[11]); //Operador negación
 		                inicio = i - 1;
 		                fin++; //Como agergue negacion y parenteisi, sumo al fin
+		                if(formula[(i - 2)].tipo == 'negacion'){inicio--;} //En caso de que fuera una negacion, no agrego parenteis aun
 		            } else {
 		                var contadorParentesis = 0;
 		                for (var j = i; j >= 0; j--) {
@@ -538,7 +595,7 @@
 		 * @param int cantVar
 		 * 
 		 */
-		function generarTabla(cantVar) {
+		function generarTabla(cantVar, tipo) {
 		    var col = cantVar; //Las columnas de la tabla de verdad. Cada columnas será una posicion en el array
 		    var filas = Math.pow(2, cantVar); //Filas que va a tener
 		    var procesar = 1; //variable auxiliar para repeticion de valores booleanos
@@ -551,10 +608,12 @@
 
 		        for (var h = 0; h < procesar; h++) {
 		            for (var j = 0; j < filas; j++) {
-		                filaValores.push(true);
+				if(tipo == 'VF'){filaValores.push(true);}
+				if(tipo == '01'){filaValores.push(false);}
 		            }
 		            for (var j = 0; j < filas; j++) {
-		                filaValores.push(false);
+		                if(tipo == 'VF'){filaValores.push(false);}
+				if(tipo == '01'){filaValores.push(true);}
 		            }
 		        }
 
@@ -585,7 +644,7 @@
 		 * 
 		 * 
 		 */
-		function armarTablaHTML(variables, tabla, resultados) {
+		function armarTablaHTML(variables, tabla, resultados, formato) {
 		    $('#tabla').empty();
 		    $('#errorHandling').empty();
 
@@ -596,20 +655,27 @@
 		    filaCabezal.append('<th>Resultado</th>');
 
 		    for (var i = 0; i < tabla[0].length; i++) {
-		        //var filaValores = $('#tabla').append('<tr>');
 		        var filaValores = "<tr>";
 		        for (var j = 0; j < variables.length; j++) {
-		            var muestra = 'F';
+			var muestra = '';
+		            if(formato == 'VF'){muestra = 'F';}
+			    if(formato == '01'){muestra = '0';}
 		            if (tabla[j][i]) {
-		                muestra = 'V'
+		                if(formato == 'VF'){muestra = 'V';}
+			    	if(formato == '01'){muestra = '1';}
 		            }
 
 		            //filaValores.append('<td style="border-bottom: 1px solid">'+muestra+'</td>');
 		            filaValores += '<td style="border-bottom: 1px solid">' + muestra + '</td>';
 
 		        }
-		        var res = 'F';
-		        if (eval(resultados[i])) { res = 'V'; }
+		        var res = '';
+      			if(formato == 'VF'){res = 'F';}
+      			if(formato == '01'){res = '0';}
+      		        if (eval(resultados[i])) { 
+      				if(formato == 'VF'){res = 'V';}
+      				if(formato == '01'){res = '1';}
+      			}
 		        //filaValores.append('<td style="border-bottom: 1px solid">'+res+'</td>');
 		        filaValores += '<td style="border-bottom: 1px solid">' + res + '</td>';
 		        filaValores += '</tr>';
@@ -623,6 +689,7 @@
 
 		function cargarCaracterEnCasilla(codigo) {
 		    $('#visor').append(codigo);
+		    //console.log($('#visor').text().length);
 		}
 
 		function limpiarVisor() {
@@ -635,6 +702,18 @@
 		    $('#tabla').empty();
 		    var msj = $('#errorHandling').append("<div class='alert alert-danger' role='alert'>Error en la formulación!</div>");
 		}
+		
+		function checkearFormaDeMostrar(){
+		  if($('#chk01VF').prop('checked')){
+		    return '01'
+		  }else{
+		    return 'VF';
+		  }
+		}
+		
+		$("#chk01VF").change(function() {
+      
+    });
 
 		/*####################################################################################################*/
 
@@ -645,16 +724,24 @@
 		 * 
 		 */
 		function procesarTabla(formula) {
-		    var arrayFormula = armarFormula(formula); //Array con la formula
+  		  var tipo = checkearFormaDeMostrar();
+  		  var arrayFormula = armarFormula(formula); //Array con la formula
 		    if (chequearValidezFormula(arrayFormula)) {
 		        //console.log("valida");
 		        var varTitulos = asignarVariables(arrayFormula); //Cabeceras - Variables totales existentes
-		        var arrayTabla = generarTabla(varTitulos.length);
+		        
+			      var arrayTabla = generarTabla(varTitulos.length, tipo);
 
 		        var formulaCargada = cargarValoresDeVerdadEnFormula(arrayFormula, varTitulos, arrayTabla);
 
+            //Armo todos los parentesis basandome en precedencia de operadores
 		        var formParentesiConjuntivos = agregaParentesis(formulaCargada, 8743); //Agrega parentesis a la conjunción
-		        var formParentesisFinal = agregaParentesis(formParentesiConjuntivos, 8744); //Agrega parentesis a la disyunción
+		        var formParentesisDistuntivos = agregaParentesis(formParentesiConjuntivos, 8744); //Agrega parentesis a la disyunción
+		        var formParentesisDistuntivosExcl = agregaParentesis(formParentesisDistuntivos, 8891); //XOR
+		        var formParentesisCondicional = agregaParentesis(formParentesisDistuntivosExcl, 8594); //Agrega parentesis a condicional
+		        var formParentesisFinal = agregaParentesis(formParentesisCondicional, 8596); //Agrega parentesis a bicondcional
+		        //
+		        
 
 		        //Solucionamos el XOR, el bicondiciona y el condicional
 		        //En los tres casos respeta el armado de parentesis, evitrando perder el orden
@@ -664,11 +751,12 @@
 		        var formulas = armarOperaciones(formNorm, varTitulos.length);
 
 		        //Generamos la tabla HTML
-		        armarTablaHTML(varTitulos, arrayTabla, formulas);
+		       
+			armarTablaHTML(varTitulos, arrayTabla, formulas, tipo);
 
 		    } else {
 		        mensajeDeErrorFormula();
-		        console.log("errada");
+		        console.log("Error de formulacion");
 		    }
 
 		    //console.log(arrayTabla);

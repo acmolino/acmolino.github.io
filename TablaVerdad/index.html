@@ -13,8 +13,22 @@
 	<body>
 		<div class="container">
 			<div id="contenedorCalc">
+
 				<!-- Visro de formula -->
 				<div id="visor"></div>
+				
+				<!-- Selecor de 0-1 o V-F-->
+				<div id="contSelectorBoolean"> 
+				<label class="switch">
+           <input type="checkbox" id="chk01VF">
+           <div class="slider round">
+            <span class="on"> 0-1</span>
+            <span class="off"> V-F</span>
+           </div>
+          </label>
+        </div>
+					 
+				
 				<div class="botonera">
 					<!-- Variables -->
 					<button class="btn btn-success" onclick="cargarCaracterEnCasilla('&#112;')">&#112;</button>
@@ -37,9 +51,12 @@
 					
 					
 					<button class="btn btn-secondary" onclick="limpiarVisor()">AC</button>
+					
+	
 					<!-- Boton de calculo  -->
 					<button id="botonCalculo" class="btn btn-info" onclick="procesarTabla($('#visor').text())">PROCESAR</button>
 					</div><!-- Fin contenedor botonera-->
+					
 					<div id="contenedorTabla" class="table-responsive">
 						<!-- Donde se mostrará la tabla -->
 						<table id='tabla'>
@@ -57,5 +74,10 @@
 				
 				<!--Todos los codigos de resolucion en JavaScript -->
 				<script type="text/javascript" src="scripts.js"></script>
+				
+				
+				<footer class="footer">
+          <!--<p align="center">Adrián Molino</p>-->
+      </footer>
 			</body>
 		</html>
