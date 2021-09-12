@@ -3,6 +3,8 @@
  * 
  */ 
 
+ //Ver linea 343
+
 		//Variables y operadores
 		const variablesYoperadores = [
 		    { codigo: 8743, operador: '&&', tipo: 'conector' }, //0
@@ -20,7 +22,7 @@
 
 		]; //Codigos de conectoers y variables
 
-  var tablaVisible = false;
+  	var tablaVisible = false;
 
 
 		/**
@@ -198,11 +200,19 @@
 
 		            //Ver hacia la izquierda
 		            if (formula[i - 1].tipo == 'variable') {
-		                if ((i - 2) >= 0 && formula[i - 2].tipo == 'negacion') {
+		            		if ((i - 2) >= 0 && formula[i - 2].tipo == 'parentesis') {
+		            			if ((i - 3) >= 0 && formula[i - 3].tipo == 'negacion'){
+		            				formula.splice(i - 3, 0, variablesYoperadores[9]); //Parenteis de apertura
+		            			}else{
+		            				formula.splice(i - 2, 0, variablesYoperadores[9]); //Parenteis de apertura
+		            			}
+		            		} else if ((i - 2) >= 0 && formula[i - 2].tipo == 'negacion') {
 		                    formula.splice(i - 2, 0, variablesYoperadores[9]); //Parenteis de apertura
 		                } else {
 		                    formula.splice(i - 1, 0, variablesYoperadores[9]); //Parenteis de apertura
 		                }
+
+
 		            }
 
 		            if (formula[i - 1].codigo == 41) { //parentesis de cierre
@@ -217,7 +227,7 @@
 		                    }
 
 		                    if (formula[j].codigo == 40 && contadorParentesis <= 1) { //cuando encuentro un parentesis de apertura
-		                        if ((j - 1) >= 1 && formula[j - 1].tipo == 'negacion') {
+		                        if ((j - 1) >= 0 && formula[j - 1].tipo == 'negacion') {
 		                            formula.splice(j - 1, 0, variablesYoperadores[9]);
 		                        } else {
 		                            formula.splice(j, 0, variablesYoperadores[9]);
@@ -232,7 +242,7 @@
 		        } //Fin de encontrar operador elegido
 		    } //fin recorrida
 
-		    //console.log(formula);
+		    console.log(formula);
 		    return formula;
 		} //fin de funcion
 
@@ -314,7 +324,6 @@
                 //Hacia la izquierda <<-
 		            //Cuendo aparece parentesis antes del operador
 		            if (formula[(i - 1)].codigo == '41') { //Me fijo si hay parentesis de cierre
-
 		                var contadorParentesisCierre = 1;
 		                for (var j = (i - 2); j >= 0; j--) {
 
@@ -329,8 +338,9 @@
 		                        var b = j;
 		                        if ((j - 1) >= 0 && formula[j - 1].codigo == '172') { //TRABAJANDO para solucionar la negacion
 		                            b = j - 1;
+		                            //elementosAquitarIzq++;  //Ver que pasa con esto
 		                        }
-		                        for (var h = (i - 1); h >= b; h--) {
+		                        for (var h = (i-1); h >= b; h--) {
 		                            variable1.push(formula[h]);
 		                            elementosAquitarIzq++;
 		                        }
@@ -340,6 +350,11 @@
 		            } else {
 		                variable1.push(formula[(i - 1)]);
 		                elementosAquitarIzq++;
+		                /*if(formula[(i - 2)].codigo == '40'){
+		                	elementosAquitarIzq++;
+		                }*/
+		                //elementosAquitarIzq+=2; //Revisar y hacer mas pruebas
+		                //Falta ver si ademas es una negacion que aparece
 		            }
 
 		            variable1.reverse(); //Debo invertirla
@@ -352,17 +367,20 @@
                   // variable 
                   // parentesis
                   
-                //Analaiso negacion que puede bifurcar en las otras dos  
+                //Analiso negacion que puede bifurcar en las otras dos  
                 var n = i+1;
                 if(formula[n].tipo == 'negacion'){
                   variable2.push(formula[(n)]);
-                  n++;
                   elementosAquitarDer++;
+                  n++;
+                  //console.log("Entra");
+            
                 }
 		            //Cuendo aparece parentesis despues del operador
 		            if (formula[n].codigo == '40') { //Me fijo si hay parentesis de apertura
 		                var contadorParentesisCierre = 1;
 		                for (var j = (n + 1); j < formula.length; j++) {
+		                	//console.log(contadorParentesisCierre);
 
 		                    if (formula[j].codigo == '40') {
 		                        contadorParentesisCierre++;;
@@ -372,7 +390,7 @@
 		                    }
 
 		                    if (formula[j].codigo == '41' && contadorParentesisCierre < 1) {
-		                        for (var h = (i + 1); h <= j; h++) {
+		                        for (var h = (i + 1); h <= j; h++) { //Ver si debe ser n o i
 		                            variable2.push(formula[h]);
 		                            elementosAquitarDer++;
 		                        }
@@ -385,7 +403,7 @@
 		            }
 
 		            elementosAquitar = elementosAquitarIzq + elementosAquitarDer;
-		            formula.splice(i, 1); //Elimino ese operador
+		            formula.splice(i, 1); //Elimino ese operador bicondicional
 
 		            /*---------------------------------------------------------------------------------------------*/
 		            //Armo un array con la nueva formla donde tengos los dos condcionales con 
@@ -415,20 +433,20 @@
 		            nuevaFormCompletaSinBi.push(variablesYoperadores[10]); //Parentsis cierre elemento derecha
 
 		            //nuevaFormCompletaSinBi.push(variablesYoperadores[10]);
-		            console.log(nuevaFormCompletaSinBi);
+		            //console.log(nuevaFormCompletaSinBi);
 		            /*---------------------------------------------------------------------------------------------*/
 
-
 		            var posicionArranqueArray = i - elementosAquitarIzq;
+
 		            formula.splice(posicionArranqueArray, elementosAquitar); //Elimino todo lo anterior
+		           // console.log(formula);
+		           // return false;
 
 		            //Adjunto la formula sin el bicondicional al resto de la formula
 		            for (var y = 0; y < nuevaFormCompletaSinBi.length; y++) {
 		                formula.splice(posicionArranqueArray, 0, nuevaFormCompletaSinBi[y]);
 		                posicionArranqueArray++;
 		            }
-
-
 
 		            i = 0; //Recorro nuevamante desde 0 en caso de haber encontrado
 		        } //Fin de operador bicondicional
@@ -452,8 +470,7 @@
 		 * @return array formula sin condicional
 		 */
 		function quitarCondicional(formula) {
-				formula = quitarDobleNegacion(formula);
-				console.log(formula);
+				formula = quitarDobleNegacion(formula); //Para qu no interfiera
 		    for (var i = 0; i < formula.length; i++) {
 		        if (formula[i].operador == 'condicional') {
 		            var inicio = i
@@ -482,12 +499,13 @@
 		                } //Fin de bucle
 		            } else {
 		                fin = b + 1;
-		            } //Fin de con dicion parenteis derecha
+		            } //Fin decon dicion parenteis derecha
 
-		            //Analisis a la izquierda del operador
+		            
+		            //Analisis a la izquierda del operador (antecedente)
 		            if (formula[(i - 1)].tipo != 'parentesis') {
 		                formula.splice(i - 1, 0, variablesYoperadores[11]); //Operador negación
-		                inicio = i - 1;
+		                inicio = i-1;
 		                fin++; //Como agergue negacion y parenteisi, sumo al fin
 		                if(formula[(i - 2)].tipo == 'negacion'){inicio--;} //En caso de que fuera una negacion, no agrego parenteis aun
 		            } else {
@@ -499,23 +517,22 @@
 		                    if (formula[j].codigo == '40') {
 		                        contadorParentesis--;
 		                    }
+		                    //console.log(contadorParentesis);
 
 		                    if (formula[j].codigo == '40' && contadorParentesis < 1) {
+		  
 		                        //Si el parentesis esta antecedido por una negacion
 		                        //la contemplo para el armado de la parentisación
 		                        if ((j - 1) >= 0 && formula[(j - 1)].codigo == '172') {
 		                            inicio--;
 		                        }
-
 		                        formula.splice(j, 0, variablesYoperadores[11]); //Operador negación
 		                        fin++;
-
 		                        break;
 		                    }
 		                    inicio--; //Tira el inicio más atras
 		                } //Fin recorrida inversa busqueda de inicio parentesis
 		            }
-
 
 		            formula.splice(fin + 1, 0, variablesYoperadores[10]); //Agrego parentesisi de cierre
 		            formula.splice(inicio, 0, variablesYoperadores[9]); //Agrego parentesis de apertura
@@ -584,7 +601,6 @@
 		    }
 		    return lineasCodigo;
 		}
-
 
 		/*####################################################################################################*/
 
@@ -738,14 +754,19 @@
 		        var formParentesiConjuntivos = agregaParentesis(formulaCargada, 8743); //Agrega parentesis a la conjunción
 		        var formParentesisDistuntivos = agregaParentesis(formParentesiConjuntivos, 8744); //Agrega parentesis a la disyunción
 		        var formParentesisDistuntivosExcl = agregaParentesis(formParentesisDistuntivos, 8891); //XOR
-		        var formParentesisCondicional = agregaParentesis(formParentesisDistuntivosExcl, 8594); //Agrega parentesis a condicional
-		        var formParentesisFinal = agregaParentesis(formParentesisCondicional, 8596); //Agrega parentesis a bicondcional
+		        var formParentesisFinal = agregaParentesis(formParentesisDistuntivosExcl, 8594); //Agrega parentesis a condicional
+
+		        //El bicondicional ya no lo hago porque lo soluciona la propia funcion
+	
 		        //
 		        
 
 		        //Solucionamos el XOR, el bicondiciona y el condicional
 		        //En los tres casos respeta el armado de parentesis, evitrando perder el orden
 		        var formNorm = quitarCondicional(quitarBiCondicional(sustituirXOR(formParentesisFinal)));
+
+		        /*var formSinBi = quitarBiCondicional(formParentesisFinal);
+		        console.log(formSinBi);*/
 
 		        //console.log(formParentesisFinal);
 		        var formulas = armarOperaciones(formNorm, varTitulos.length);
