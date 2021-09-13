@@ -67,6 +67,11 @@
 		    if (formula[formula.length - 1].tipo == 'conector') {
 		        return false;
 		    }
+			
+		//Si termina con negacion está mal 
+		    if (formula[formula.length - 1].tipo == 'negacion' ) {
+		        return false;
+		    }
 
 		    var contParentesis = 0;
 		    var hayParentesis = false;
@@ -78,6 +83,9 @@
 		                return false;
 		            }
 		            if (formula[i].tipo == 'conector' && formula[sig].tipo == 'conector') {
+		                return false;
+		            }
+			if (formula[i].tipo == 'negacion' && formula[sig].tipo == 'conector') {
 		                return false;
 		            }
 		        }
