@@ -3,6 +3,16 @@
  * 
  */
 
+ /**
+  * TO DO
+  * 
+  * 
+  * Probar o exlusivo para ver si està solucionado
+*
+* Ver parentesisi de cierres en chequeo
+*
+  */ 
+
 //Variables y operadores
 const variablesYoperadores = [
     { codigo: 8743, operador: '&&', tipo: 'conector' }, //0
@@ -171,7 +181,7 @@ function quitarDobleNegacion(formula) {
 
 function agregaParentesis(formula, operador) {
     formula = quitarDobleNegacion(formula);
-    console.log(formula.length);
+   
     for (var i = 0; i < formula.length; i++) {
         if (formula[i].codigo == operador) {
 
@@ -275,7 +285,12 @@ function sustituirXOR(formula) {
 
             //Primero me fijo si no tiene parentesis a su derecha
             if (formula[(i + 1)].operador != '(') {
-                formula.splice(i + 2, 0, variablesYoperadores[10]); //parentesis de cierre
+		if(formula[(i + 1)].tipo == 'negacion'){
+			formula.splice(i + 3, 0, variablesYoperadores[10]); //parentesis de cierre
+		}else{
+formula.splice(i + 2, 0, variablesYoperadores[10]); //parentesis de cierre
+}
+                
             } else {
                 for (var j = i; j < formula.length; j++) {
                     if (formula[j].codigo == '41') {
@@ -699,14 +714,20 @@ function armarTablaHTML(variables, tabla, resultados, formato) {
 /*####################################################################################################*/
 
 function cargarCaracterEnCasilla(codigo) {
-    $('#visor').append(codigo);
-    //console.log($('#visor').text().length);
+    //$('#visor').append(codigo);
+    $("#visor").val($("#visor").val() + codigo);
 }
 
 function limpiarVisor() {
-    $('#visor').empty();
+    $('#visor').val("");
+    //$("#visor").focus();
+    //$('#visor').empty();
     $('#tabla').empty();
     $('#errorHandling').empty();
+}
+
+function borrarUno(){
+  $("#visor").val($("#visor").val().slice(0, -1));
 }
 
 function mensajeDeErrorFormula() {
@@ -721,10 +742,6 @@ function checkearFormaDeMostrar() {
         return 'VF';
     }
 }
-
-$("#chk01VF").change(function() {
-
-});
 
 /*####################################################################################################*/
 
@@ -765,11 +782,19 @@ function procesarTabla(formula) {
         //Generamos la tabla HTML
         /*#########################################################################################*/
         var formulas = armarOperaciones(formNorm, varTitulos.length);
+        armarTablaHTML(varTitulos, arrayTabla, formulas, tipo);
         /*#########################################################################################*/
 
-
-
-        armarTablaHTML(varTitulos, arrayTabla, formulas, tipo);
+    
+        //var elmnt = document.getElementById("tabla");
+    	//elmnt.scrollIntoView();
+    
+    	//$('body').scrollTo('#tabla'); // Scroll screen to target element
+    	//window.location.href='#tabla'
+    
+    	document.querySelector('#tabla').scrollIntoView({
+            	behavior: 'smooth'
+        	});
 
     } else {
         mensajeDeErrorFormula();
