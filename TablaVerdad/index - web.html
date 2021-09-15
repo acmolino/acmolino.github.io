@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Adrian Molino">
+		<title>Calculadora de tabla de verdad</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	</head>
+	<body>
+		<div class="container">
+			<div id="contenedorCalc">
+
+				<!-- Visro de formula -->
+				<!--<div id="visor"></div>-->
+				<input type="text" name="" id="visor" readonly>
+				
+				<!-- Selecor de 0-1 o V-F-->
+				<div id="contSelectorBoolean"> 
+				<label class="switch">
+           <input type="checkbox" id="chk01VF">
+           <div class="slider round">
+            <span class="on"> 0-1</span>
+            <span class="off"> V-F</span>
+           </div>
+          </label>
+        </div>
+					 
+				
+				<div class="botonera">
+					<!-- Variables -->
+					<button class="btn btn-success" onclick="cargarCaracterEnCasilla('&#112;')">&#112;</button>
+					<button class="btn btn-success" onclick="cargarCaracterEnCasilla('&#113;')">&#113;</button>
+					<button class="btn btn-success" onclick="cargarCaracterEnCasilla('&#114;')">&#114;</button>
+					<button class="btn btn-success" onclick="cargarCaracterEnCasilla('&#115;')">&#115;</button>
+					<!-- Conectivas -->
+					<button class="btn btn-primary" onclick="cargarCaracterEnCasilla('&#8743;')">&#8743;</button>
+					<button class="btn btn-primary" onclick="cargarCaracterEnCasilla('&#8744;')">&#8744;</button>
+					<button class="btn btn-primary" onclick="cargarCaracterEnCasilla('&#8594;')">&#8594;</button>
+					<button class="btn btn-primary" onclick="cargarCaracterEnCasilla('&#8891;')">&#8891;</button>
+					<button class="btn btn-primary" onclick="cargarCaracterEnCasilla('&#8596;')">&#8596;</button>
+					
+					<!-- Negacion  -->
+					<button class="btn btn-danger" style="background-color:  #FF5733" onclick="cargarCaracterEnCasilla('&#172;')">&#172;</button>
+					
+					<!-- Parentesis -->
+					<button class="btn btn-secondary" onclick="cargarCaracterEnCasilla('&#40;')">&#40;</button>
+					<button class="btn btn-secondary" onclick="cargarCaracterEnCasilla('&#41;')">&#41;</button>
+					
+					<!--Eliminaciones -->
+					<button class="btn btn-danger" onclick="limpiarVisor()">AC</button>
+					<button class="btn btn-danger" onclick="borrarUno()"><i class="bi bi-backspace-fill"></i></button>
+					
+	
+					<!-- Boton de calculo  -->
+					<button id="botonCalculo" class="btn btn-info" onclick="procesarTabla($('#visor').val())">PROCESAR</button>
+					</div><!-- Fin contenedor botonera-->
+					
+					<div id="contenedorTabla" class="table-responsive">
+						<!-- Donde se mostrará la tabla -->
+						<table id='tabla'>
+							
+							<!-- ####  CONTENIDO DE TABLA GENERADO  ##### -->
+							
+						</table>
+					</div>
+					
+					<!-- Donde se muestra error de formulacion -->
+					<div id="errorHandling"></div>
+					</div><!-- Fin contendor calculadora -->
+					
+				</div>
+				
+				
+				<!--Todos los codigos de resolucion en JavaScript -->
+				<script type="text/javascript" src="js/scripts.js"></script>
+				
+				
+				<footer class="footer">
+          <!--<p align="center">Adrián Molino</p>-->
+      </footer>
+			</body>
+		</html>
