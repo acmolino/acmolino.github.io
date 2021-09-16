@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DGES Liceos detalles</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+	<style type="text/css">
+		.container{
+			width: 50%;
+			margin: auto;
+		}
+
+		@media only screen and (max-width: 400px) {
+		  .container{
+			width: 100%;
+			margin: auto;
+		}
+		}
+	</style>
+
+</head>
+<body>
+	<div class="container">
+
+		<div class="row">
+    		<div class="col">
+		      <h2>Liceos</h2>
+				<select id="liceos" class="form-select"></select>
+    		</div>
+    	</div>
+		
+
+		
+		<div id="muestraDatos" class="row" style="margin-top: 10px;">
+			<div class="col">
+				<table class="table table-striped">
+					<thead id="tablaTitulo" class="table-dark"></thead>
+					<tbody id="tablaDatos">
+						
+					</tbody>	
+				</table>
+			</div>
+		</div>
+	
+		<center><button class="btn btn-primary" onclick="cerrarTab()">Cerrar</button></center>
+	
+	</div>
+</body>
+
+<script type="text/javascript">
+	var data =  {
+			     "liceos": 
+			     [
+			     	{"nro": "--Buscar--"},
+				    {"nro": 7, "direccion": "Berro 733", "cursos": ["1ero", "2do", "3ero"], "omnibus":["76", "316", "192"]},
+				    {"nro": 28, "direccion": "Bv España 2870", "cursos" :["4to", "5to", "6to"], "orientaciones": ["5to Humanistico", "6to Derecho", "6to Economía"], "omnibus":["76", "183", "407"]}
+			    ]		
+			}
+
+	for (var i = 0; i < data.liceos.length; i++) {
+		$('#liceos').append("<option>"+data.liceos[i].nro+"</oprion>")
+	}
+
+	//Mostrar datos
+	$('#liceos').on('change', function() {
+	 	for (var i = 0; i < data.liceos.length; i++) {
+	 		if(data.liceos[i].nro == this.value){
+	 			armarTabla(i);
+	 		}
+	 	}
+
+	 
+	});
+
+	function armarTabla(pos){
+		$('#tablaDatos').empty(); $('#tablaTitulo').empty();
+	  	$('#tablaTitulo').append("<tr><th><b>Liceo:</b> </th><th>"+data.liceos[pos].nro+"</th></tr>");
+	  	$('#tablaDatos').append("<tr><td>Dirección: </td><td>"+data.liceos[pos].direccion+"</td></tr>");
+	  	$('#tablaDatos').append("<tr><td>Cursos: </td><td id='cursos"+pos+"'></td></tr>");
+	  	for (var i = 0; i < data.liceos[pos].cursos.length; i++) {
+	  		$('#cursos'+pos).append("<li>"+data.liceos[pos].cursos[i]+"</li>");
+	  	}
+	  	if(data.liceos[pos].hasOwnProperty('orientaciones')){
+	  		$('#tablaDatos').append("<tr><td>Orientaciones: </td><td id='orientaciones"+pos+"'></td></tr>");
+	  		for (var i = 0; i < data.liceos[pos].orientaciones.length; i++) {
+	  			$('#orientaciones'+pos).append("<li>"+data.liceos[pos].orientaciones[i]+"</li>");
+	  		}
+	  	}
+	  	if(data.liceos[pos].hasOwnProperty('omnibus')){
+	  		$('#tablaDatos').append("<tr><td>Lineas de omnibus: </td><td id='omnibus"+pos+"'></td></tr>");
+	  		for (var i = 0; i < data.liceos[pos].omnibus.length; i++) {
+	  			$('#omnibus'+pos).append("<li>"+data.liceos[pos].omnibus[i]+"</li>");
+	  		}
+	  	}
+	  	
+	}
+
+
+	function cerrarTab(){
+		window.top.close();
+	}
+
+
+</script>
+</html>
