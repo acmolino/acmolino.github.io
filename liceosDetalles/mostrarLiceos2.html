@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DGES Liceos detalles</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+	<style type="text/css">
+		.container{
+			width: 50%;
+			margin: auto;
+		}
+		
+		td{
+		  vertical-align: middle;
+		}
+
+		@media only screen and (max-width: 400px) {
+		  .container{
+  			width: 100%;
+  			margin: auto;
+		  }
+		}
+		
+		select {
+		  text-align-last: center;
+		}
+		
+	</style>
+
+</head>
+<body>
+	<div class="container">
+
+		<div class="row">
+    		<div class="col">
+		      <h2>Liceos</h2>
+    				<select id="liceos" class="form-select">
+    				  <option disabled selected>-- Liceos --</option>
+    				</select>
+    		</div>
+    	</div>
+		
+
+		
+		<div id="muestraDatos" class="row" style="margin-top: 10px;">
+			<div class="col">
+				<div class="accordion" id="acordionDatos">
+				  
+				</div>
+			</div>
+		</div>
+		
+    <br><br>
+		<center><button class="btn btn-danger" onclick="cerrarTab()">Cerrar</button></center>
+		
+	</div>
+	
+<script type="text/javascript">
+	var data =  {
+			     "liceos": 
+			     [
+				    {"nro": 7, "direccion": "Berro 733", "cursos": ["1ero", "2do", "3ero"], "omnibus":["76", "316", "192"]},
+				    {"nro": 28, "direccion": "Bv España 2870", "cursos" :["4to", "5to", "6to"], "orientaciones": ["5to Humanistico", "6to Derecho", "6to Economía"], "omnibus":["76", "183", "407"]}
+			    ]		
+			}
+
+	for (var i = 0; i < data.liceos.length; i++) {
+		$('#liceos').append("<option>"+data.liceos[i].nro+"</oprion>")
+	}
+
+	//Mostrar datos
+	$('#liceos').on('change', function() {
+	 	for (var i = 0; i < data.liceos.length; i++) {
+	 		if(data.liceos[i].nro == this.value){
+	 			armarData(i);
+	 		}
+	 	}
+
+	 
+	});
+
+	function armarData(pos){
+	  	$('#acordionDatos').empty();
+	  	
+	  	/*######  Direccion  #########*/
+	  	$('#acordionDatos').append("<div class='accordion-item' id='itemDireccion"+pos+"'>");
+	  	$('#itemDireccion'+pos).append("<h2 class='accordion-header' id='panelDireccion"+pos+"'>");
+	  	$('#panelDireccion'+pos).append('<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsDireccion-'+pos+'" aria-expanded="true" aria-controls="panelsDireccion-'+pos+'">Ubicación</button>');
+	  	$('#itemDireccion'+pos).append('<div id="panelsDireccion-'+pos+'" class="accordion-collapse collapse" aria-labelledby="panelsDireccion-'+pos+'">');
+	  	$('#panelsDireccion-'+pos).append('<div class="accordion-body" id="cuerpoDireccion'+pos+'">');
+	  	$('#cuerpoDireccion'+pos).append('<p>'+data.liceos[pos].direccion+'</p>');
+	  	
+	  	/*######   Cursos   ###########*/
+  		$('#acordionDatos').append("<div class='accordion-item' id='itemCursos"+pos+"'>");
+  		$('#itemCursos'+pos).append("<h2 class='accordion-header' id='panelCursos"+pos+"'>");
+  		$('#panelCursos'+pos).append('<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsCursos-'+pos+'" aria-expanded="true" aria-controls="#panelsCursos-'+pos+'">Cursos</button>');
+  		$('#itemCursos'+pos).append('<div id="panelsCursos-'+pos+'" class="accordion-collapse collapse show" aria-labelledby="panelsCursos-'+pos+'">');
+	  	$('#panelsCursos-'+pos).append('<div class="accordion-body" id="cuerpoCursos'+pos+'">');
+  		
+  		for (var i = 0; i < data.liceos[pos].cursos.length; i++) {
+  		  $('#cuerpoCursos'+pos).append("<li class='list-group-item'>"+data.liceos[pos].cursos[i]+"</li>");
+  	  }
+  	  
+  	  /*######   Orientaciones   ###########*/
+  	  if(data.liceos[pos].hasOwnProperty('orientaciones')){
+    	  $('#acordionDatos').append("<div class='accordion-item' id='itemOrientaciones"+pos+"'>");
+    		$('#itemOrientaciones'+pos).append("<h2 class='accordion-header' id='panelOrientaciones"+pos+"'>");
+    		$('#panelOrientaciones'+pos).append('<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsOrientaciones-'+pos+'" aria-expanded="true" aria-controls="#panelsOrientaciones-'+pos+'">Orientaciones</button>');
+    		$('#itemOrientaciones'+pos).append('<div id="panelsOrientaciones-'+pos+'" class="accordion-collapse collapse show" aria-labelledby="panelsOrientaciones-'+pos+'">');
+  	  	$('#panelsOrientaciones-'+pos).append('<div class="accordion-body" id="cuerpoOrientaciones'+pos+'">');
+    		
+    		for (var i = 0; i < data.liceos[pos].orientaciones.length; i++) {
+    		  $('#cuerpoOrientaciones'+pos).append("<li class='list-group-item'>"+data.liceos[pos].orientaciones[i]+"</li>");
+    	  }
+  	  }
+  	  
+  	   /*######   Omnibus   ###########*/
+  	  if(data.liceos[pos].hasOwnProperty('omnibus')){
+    	  $('#acordionDatos').append("<div class='accordion-item' id='itemOmnibus"+pos+"'>");
+    		$('#itemOmnibus'+pos).append("<h2 class='accordion-header' id='panelOmnibus"+pos+"'>");
+    		$('#panelOmnibus'+pos).append('<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsOmnibus-'+pos+'" aria-expanded="true" aria-controls="#panelsOmnibus-'+pos+'">Omnibus</button>');
+    		$('#itemOmnibus'+pos).append('<div id="panelsOmnibus-'+pos+'" class="accordion-collapse collapse" aria-labelledby="panelsOmnibus-'+pos+'">');
+  	  	$('#panelsOmnibus-'+pos).append('<div class="accordion-body" id="cuerpoOmnibus'+pos+'">');
+    		
+    		for (var i = 0; i < data.liceos[pos].omnibus.length; i++) {
+    		  $('#cuerpoOmnibus'+pos).append("<li class='list-group-item'>"+data.liceos[pos].omnibus[i]+"</li>");
+    	  }
+  	  }
+  	  
+	}
+
+
+	function cerrarTab(){
+		window.top.close();
+	}
+
+
+</script>	
+	
+</body>
+</html>
