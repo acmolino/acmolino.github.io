@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+	<meta charset="utf-8">
+	<title>Generación de datos</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <style>
+    body{
+      margin-top: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    
+    <div class="form-group">
+      <lable>Nro liceo</lable><input type="number" id="txtNroLiceo" class="form-control">
+    </div>
+    
+    
+    <!-- ############  CURSOS  #######################-->
+    <div class="form-group">
+      <lable>Cursos</lable><input type="text" id="txtCursos" class="form-control">
+    </div>
+    
+    <div class="alert alert-secondary" role="alert">
+      Ingresar los cursos separados por coma (,). Ejemplo: 1ero, 2do,....
+    </div>
+      
+    
+    <!-- ############  Orientaciones  #######################-->
+    <div class="form-group">  
+      <lable>Orientaciones</lable><input type="textarea" id="txtOrientaciones" class="form-control">
+     </div>
+      <div class="alert alert-secondary" role="alert">
+      Ingresar las orientaciones separadas por coma (,). Ejemplo: 5to Humanistico, 6to Ingenieria,....
+    </div>
+     
+     <!-- ############  Omnibus  #######################-->
+    <div class="form-group">
+      <lable>Lineas omnibus</lable><input type="textarea" id="txtOmnibus" class="form-control">
+     </div>
+     
+     <div class="alert alert-secondary" role="alert">
+      Ingresar las lineas separadas por coma (,). Ejemplo: 192, 316,....
+    </div>
+     
+     <br>
+     <button onclick="generarJSON()" class="btn btn-success">Generar</button>
+   
+    <br><br>
+     <div id="muestraGenerado"></div>
+     
+        <br><br>
+     <div class="alert alert-success" role="alert">
+    El texto generado copiarlo y pegarlo en un documento uno seguido del otro.
+    </div>
+  
+  
+  </div>
+ 
+  
+<script>
+
+  function generarJSON(){
+
+    var datoTotalJson = "{"; //Inicia y abre JSON
+    
+    /*Nro de liceo*/
+    datoTotalJson+= "'nro': "+$('#txtNroLiceo').val()+",";
+    
+    /*Cursos separados por coma*/
+    if($('#txtCursos').val()!= ""){
+       var cursos = $('#txtCursos').val();
+       var cursosSeparadas = cursos.split(",");
+       for(var i = 0; i < cursosSeparadas.length; i++){
+         cursosSeparadas[i] = "'"+cursosSeparadas[i]+"'";
+       }
+      datoTotalJson+= "'cursos': ["+cursosSeparadas+"],";
+    }
+    
+   /*Orientaciones separadas por coma*/ 
+    if($('#txtOrientaciones').val()!= ""){
+       var orientaciones = $('#txtOrientaciones').val();
+       var orientacionesSeparadas = orientaciones.split(",");
+       for(var i = 0; i < orientacionesSeparadas.length; i++){
+         orientacionesSeparadas[i] = "'"+orientacionesSeparadas[i]+"'";
+       }
+       datoTotalJson+= "'orientaciones': ["+orientacionesSeparadas+"],";
+    }
+    
+    /*Omnibus separados por coma*/
+    if($('#txtOmnibus').val()!= ""){
+      var omnibuses = $('#txtOmnibus').val();
+      var omnibusSeparados = omnibuses.split(",");
+      for(var i = 0; i < omnibusSeparados.length; i++){
+        omnibusSeparados[i] = "'"+omnibusSeparados[i]+"'";
+      }
+      datoTotalJson+= "'omnibus': ["+omnibusSeparados+"],";
+    }
+    
+    
+    
+    datoTotalJson+="},"; //Cierre de Json
+    
+    //Muestro el text para que copien y peguen
+    $('#muestraGenerado').html(datoTotalJson);
+  
+  }
+  
+</script>  
+
+</body>
+</html>
