@@ -3,15 +3,15 @@
  * 
  */
 
- /**
-  * TO DO
-  * 
-  * 
-  * Probar o exlusivo para ver si està solucionado
-*
-* Ver parentesisi de cierres en chequeo
-*
-  */ 
+/**
+ * TO DO
+ * 
+ * 
+ * Probar o exlusivo para ver si està solucionado
+ *
+ * Ver parentesis de cierres en chequeo
+ *
+ */
 
 //Variables y operadores
 const variablesYoperadores = [
@@ -116,7 +116,8 @@ function chequearValidezFormula(formula) {
         } //Fin conteo de parenteis
     } //Fin de la recorrida
 
-    if (hayParentesis && contParentesis > 0) {
+    //Verifico que siempre existan de forma par ()
+    if (hayParentesis && contParentesis != 0) {
         return false;
     }
     return true;
@@ -181,7 +182,7 @@ function quitarDobleNegacion(formula) {
 
 function agregaParentesis(formula, operador) {
     formula = quitarDobleNegacion(formula);
-   
+
     for (var i = 0; i < formula.length; i++) {
         if (formula[i].codigo == operador) {
 
@@ -284,13 +285,13 @@ function sustituirXOR(formula) {
             formula.splice(i, 1, variablesYoperadores[3]); //Operador biCondicional
 
             //Primero me fijo si no tiene parentesis a su derecha
-            if (formula[(i + 1)].operador != '(') {
-		if(formula[(i + 1)].tipo == 'negacion'){
-			formula.splice(i + 3, 0, variablesYoperadores[10]); //parentesis de cierre
-		}else{
-formula.splice(i + 2, 0, variablesYoperadores[10]); //parentesis de cierre
-}
-                
+            if (formula[(i + 1)].codigo != 40) {
+                if (formula[(i + 1)].tipo == 'negacion') {
+                    formula.splice(i + 3, 0, variablesYoperadores[10]); //parentesis de cierre
+                } else {
+                    formula.splice(i + 2, 0, variablesYoperadores[10]); //parentesis de cierre
+                }
+
             } else {
                 for (var j = i; j < formula.length; j++) {
                     if (formula[j].codigo == '41') {
@@ -300,24 +301,35 @@ formula.splice(i + 2, 0, variablesYoperadores[10]); //parentesis de cierre
                 } //Fin recorrida inversa busqueda de inicio parentesis
             }
 
+            /*Voy hacia la izquierda del operador*/
             //Manejo la negación previa
-            if ((i - 1) >= 0 && formula[(i - 1)].operador != ')') {
+            if ((i - 1) >= 0 && formula[(i - 1)].codigo != 41) { //Si no tenemos un parentesis de cierre
                 formula.splice(i - 1, 0, variablesYoperadores[9]); //parentesis de apertura
                 formula.splice(i - 1, 0, variablesYoperadores[11]); //negación
-            } else {
+            } else { //En el caso de exixtir un parenteis de cierre
+                var contadorParentesis = 1;
                 for (var j = i; j >= 0; j--) {
-                    if (formula[j].codigo == '40') {
+        
+                    if (formula[j].codigo == 41) {
+                        contadorParentesis++;
+                    }
+                    if (formula[j].codigo == 40) {
+                        contadorParentesis--;
+                    }
+
+                    if (formula[j].codigo == 40 && contadorParentesis <= 1) {
                         formula.splice(j, 0, variablesYoperadores[9]); //parentesis de apertura
-                        formula.splice(j, 0, variablesYoperadores[11]);
+                        formula.splice(j, 0, variablesYoperadores[11]); //negacion // Para que quede bicondicional negado
                         break;
                     }
+                    
                 } //Fin recorrida inversa busqueda de inicio parentesis
             }
 
 
         } //Fin if XOR
     }
-    //console.log(formula);
+    console.log(formula);
     return formula;
 }
 
@@ -381,11 +393,11 @@ function quitarBiCondicional(formula) {
 
             //Hacia la derecha ->>
             //3 opciones 
-	            // negacion 
-	            //variable 
-	            //parentesis
-		            // variable 
-		            // parentesis
+            // negacion 
+            //variable 
+            //parentesis
+            // variable 
+            // parentesis
 
             //Analiso negacion que puede bifurcar en las otras dos  
             var n = i + 1;
@@ -498,7 +510,7 @@ function quitarCondicional(formula) {
             if (formula[b].tipo == 'negacion') {
                 b++;
             }
-            //Si empieza por parentesis o negacion debo rodearlos como correposnde con parentesis	
+            //Si empieza por parentesis o negacion debo rodearlos como correposnde con parentesis   
             if (formula[b].tipo == 'parentesis') {
                 var contadorParentesis = 1;
                 var j = b + 1;
@@ -726,8 +738,8 @@ function limpiarVisor() {
     $('#errorHandling').empty();
 }
 
-function borrarUno(){
-  $("#visor").val($("#visor").val().slice(0, -1));
+function borrarUno() {
+    $("#visor").val($("#visor").val().slice(0, -1));
 }
 
 function mensajeDeErrorFormula() {
@@ -785,16 +797,16 @@ function procesarTabla(formula) {
         armarTablaHTML(varTitulos, arrayTabla, formulas, tipo);
         /*#########################################################################################*/
 
-    
+
         //var elmnt = document.getElementById("tabla");
-    	//elmnt.scrollIntoView();
-    
-    	//$('body').scrollTo('#tabla'); // Scroll screen to target element
-    	//window.location.href='#tabla'
-    
-    	document.querySelector('#tabla').scrollIntoView({
-            	behavior: 'smooth'
-        	});
+        //elmnt.scrollIntoView();
+
+        //$('body').scrollTo('#tabla'); // Scroll screen to target element
+        //window.location.href='#tabla'
+
+        document.querySelector('#tabla').scrollIntoView({
+            behavior: 'smooth'
+        });
 
     } else {
         mensajeDeErrorFormula();
