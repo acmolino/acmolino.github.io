@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Pensamiento Computacional & Didáctica</title>
+  <style>
+    :root {
+      --primario: #0277bd;
+      --secundario: #b3e5fc;
+      --fondo: #e1f5fe;
+      --texto: #333;
+    }
+    body { margin:0; font-family:sans-serif; background:var(--fondo); color:var(--texto); }
+    nav { position:sticky; top:0; background:white; box-shadow:0 2px 5px rgba(0,0,0,0.1); z-index:100;}
+    nav ul { display:flex; list-style:none; margin:0; padding:0; overflow-x:auto;}
+    nav a { padding:1rem; color:var(--primario); text-decoration:none; transition:.3s; }
+    nav a:hover { background:var(--primario); color:white; }
+    section { padding:2rem 1rem; max-width:1000px; margin:auto; }
+    h2 { border-bottom:3px solid var(--primario); padding-bottom:.3rem; }
+    .contenedor { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+    .tarjeta { background:white; border-radius:8px; box-shadow:0 3px 6px rgba(0,0,0,0.1);
+               padding:1rem; flex:1 1 220px; transition:.3s; }
+    .tarjeta:hover { background:var(--secundario); transform:translateY(-4px); }
+    .titulo { font-size:1.2rem; color:var(--primario); margin-bottom:.5rem; }
+    .referencia { font-size:.9rem; background:white; padding:1rem; border-left:4px solid var(--primario); }
+    img.resp { max-width:100%; height:auto; border-radius:8px; margin:1rem 0; }
+    footer { text-align:center; padding:1rem; background:white; font-size:.9rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#def">Definición</a></li>
+    <li><a href="#pc">Pens. Computacional</a></li>
+    <li><a href="#vinc-pc">Vinculación PC</a></li>
+    <li><a href="#didactica">Vinculación Didáctica</a></li>
+  </ul>
+</nav>
+
+<section id="def">
+  <h2>¿Qué es el Pensamiento Computacional?</h2>
+  <p>
+    El pensamiento computacional es un proceso mental para resolver problemas de forma estructurada y eficaz, utilizando técnicas como la descomposición,
+    abstracción, reconocimiento de patrones y diseño de algoritmos :contentReference[oaicite:5]{index=5}. Va más allá de la programación, aplicable en contextos diversos :contentReference[oaicite:6]{index=6}.
+  </p>
+</section>
+
+<section id="pc">
+  <h2>Componentes del Pensamiento Computacional</h2>
+  <div class="contenedor">
+    <div class="tarjeta"><div class="titulo">Abstracción</div><div>Seleccionar información relevante e ignorar lo irrelevante.</div></div>
+    <div class="tarjeta"><div class="titulo">Descomposición</div><div>Dividir un problema en partes más pequeñas y manejables.</div></div>
+    <div class="tarjeta"><div class="titulo">Patrones</div><div>Identificar similitudes o características comunes.</div></div>
+    <div class="tarjeta"><div class="titulo">Algoritmos</div><div>Definir una secuencia de pasos ordenados para resolver un problema.</div></div>
+  </div>
+  <div class="referencia">
+    Basado en Dagienė, Sentance y Stupurienė (2017): 
+    <a href="https://www.bjmc.lu.lv/fileadmin/user_upload/lu_portal/projekti/bjmc/Contents/5_3_05_Dagiene.pdf" target="_blank">
+      Developing a Two‑Dimensional Categorization System for Educational Tasks in Informatics
+    </a>.
+  </div>
+</section>
+
+<section id="vinc-pc">
+  <h2>Vinculación con la Programación y la Tecnología</h2>
+  <img src="programacionPC.jpeg" class="resp" alt="Programación en aula">
+  <p>
+    Al programar con Scratch o bloques, los estudiantes aplican directamente la descomposición, la abstracción y la construcción de algoritmos :contentReference[oaicite:7]{index=7}. 
+    Proyectos de datos o robótica permiten aplicar estas habilidades de forma tangible :contentReference[oaicite:8]{index=8}.
+  </p>
+</section>
+
+<section id="didactica">
+  <h2>Vinculación con la Didáctica</h2>
+  <img src="pensamiento-computacional-aula.png" class="resp" alt="Actividad unplugged">
+  <p>
+    Las actividades "desenchufadas" (sin tecnología) permiten enseñar pensamiento computacional en primaria, con juegos de roles, puzzles, rutinas tipo “Pienso–Programo–Pruebo” :contentReference[oaicite:9]{index=9}.
+  </p>
+  <p>
+    Incluir robótica, Scratch, ajedrez o análisis de datos motiva el pensamiento lógico, creativo, colaborativo y reflexivo :contentReference[oaicite:10]{index=10}.
+  </p>
+</section>
+
+<footer>
+  © 2025 – Sitio de Pensamiento Computacional & Didáctica
+</footer>
+
+</body>
+</html>
